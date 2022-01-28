@@ -111,7 +111,14 @@ users.statement.push(usersOperation);
 return response.status(201).json({message:"check description"});
 });
 
+app.delete("/user",verifyIfUserAlrearyExists,(request,response)=>{
+    const {users}=request
 
+user.splice(users, 1);
+
+return response.status(201).json({message:"user deleted"});
+
+})
 
 app.post("/productInsert",verifyIfProductAlrearyExists,(request,response)=>{
 const {products}=request;
