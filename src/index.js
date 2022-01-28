@@ -29,7 +29,20 @@ if(!products){
 
 request.products=products;
 return next();
-}
+};
+
+function getbalance(declaration){
+const balance = declaration.reduce((acc,operation)=>{
+    if(operation.type ==='insert'){
+        return acc+operation.quantity
+    }else{
+        return acc-operation.quantity;
+    }
+},0)
+return balance;
+};
+
+
 
 
 
@@ -74,7 +87,7 @@ product.push({
 name,
 id:uuidv4(),
 date: new Date(),
-Statement:[],
+declaration:[],
 });
 
 return response.status(201).json({message:"product create"})
@@ -84,4 +97,40 @@ app.get("/product",verifyIfProductAlrearyExists,(request,response)=>{
     const {products}=request;
 
     return response.status(201).json(products);
-})
+});
+
+
+app.post("/productInsert",verifyIfProductAlrearyExists,(request,response)=>{
+const {products}=request;
+const {description,quantity,validate}=request.body;
+
+const declarationOperation={
+description,
+quantity,
+validate,
+type:"insert",
+};
+products.declaration.push(declarationOperation);
+
+return response.status(201).json({message:"products insert"})
+});
+
+app.post("/productRemove",verifyIfProductAlrearyExists,(request,response)=>{
+    const {products}=request;
+    const{quantity,validate}=request.body;
+    const balance=getbalance(products.declaration);
+
+  
+    if(balance < quantity){
+        return response.status(400).json({error:"insufficient products"})
+    }
+    
+const declarationOperation={
+    quantity,
+    validate,
+    type:"remove",
+}
+products.declaration.push(declarationOperation);
+ return response.status(201).json({message:"products remove"});
+
+});
