@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "flavio manzotti <manzottiflavio22@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
