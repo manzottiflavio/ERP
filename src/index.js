@@ -160,3 +160,13 @@ const {products}=request;
 const balance=getbalance(products.declaration);
 return response.status(201).json(balance);
 });
+
+
+app.delete("/products",verifyIfProductAlrearyExists,(request,response)=>{
+    const {products}=request;
+
+
+    product.splice(products, 1);
+
+    return response.status(201).json({message:"product deleted"})
+});
