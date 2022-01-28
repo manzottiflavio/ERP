@@ -134,3 +134,9 @@ products.declaration.push(declarationOperation);
  return response.status(201).json({message:"products remove"});
 
 });
+
+app.get("/balance",verifyIfProductAlrearyExists,(request,response)=>{
+const {products}=request;
+const balance=getbalance(products.declaration);
+return response.status(201).json(balance);
+});
