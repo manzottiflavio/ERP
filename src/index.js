@@ -99,6 +99,19 @@ app.get("/product",verifyIfProductAlrearyExists,(request,response)=>{
     return response.status(201).json(products);
 });
 
+app.post("/userStatement",verifyIfUserAlrearyExists,(request,response)=>{
+const {users}=request;
+const {description}=request.body;
+
+const usersOperation={
+    description
+};
+
+users.statement.push(usersOperation);
+return response.status(201).json({message:"check description"});
+});
+
+
 
 app.post("/productInsert",verifyIfProductAlrearyExists,(request,response)=>{
 const {products}=request;
