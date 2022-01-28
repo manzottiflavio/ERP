@@ -5,6 +5,7 @@
   "author": "flavio manzotti <manzottiflavio22@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.2",
     "nodemon": "^2.0.15"
   }
 }
